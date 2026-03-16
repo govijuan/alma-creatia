@@ -1,4 +1,5 @@
 import InfiniteMenu from "@/components/InfiniteMenu";
+import MenuPageHeader from "@/components/MenuPageHeader";
 
 const items = [
   {
@@ -9,7 +10,7 @@ const items = [
   },
   {
     image: "https://picsum.photos/400/400?grayscale",
-    link: "https://google.com/",
+    link: "/servicios",
     title: "Servicios",
     description: "This is pretty cool, right?",
   },
@@ -29,8 +30,11 @@ const items = [
 
 export default function Home() {
   return (
-    <div style={{ height: "100vh", position: "relative" }}>
-      <InfiniteMenu items={items} scale={1.2} />
-    </div>
+    <>
+      <MenuPageHeader />
+      <div style={{ height: "100vh", position: "relative" }}>
+        <InfiniteMenu items={items} scale={1.7} />
+      </div>
+    </>
   );
 }
