@@ -1,0 +1,11 @@
+services:
+  react-app:
+    image: ghcr.io/govijuan/alma-creatia:latest
+    container_name: alma-creatia
+    networks:
+      reverse-proxy_default:
+        aliases: []
+    restart: unless-stopped
+networks:
+  reverse-proxy_default:
+    external: true
