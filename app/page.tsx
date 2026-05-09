@@ -3,7 +3,7 @@ import MenuPageHeader from "@/components/MenuPageHeader";
 
 const items = [
   {
-    image: "https://picsum.photos/300/300?grayscal'",
+    image: "/almacreatiaredondo2blanco.png",
     link: "/principal",
     title: "Principal",
     description: "This is pretty cool, right?",
@@ -30,11 +30,8 @@ const items = [
 
 export default function Home() {
   return (
-    <>
-      <MenuPageHeader />
-      <div style={{ height: "100vh", position: "relative" }}>
-        <InfiniteMenu items={items} scale={1.7} />
-      </div>
-    </>
+    <div style={{ height: "100vh", position: "relative" }}>
+      <InfiniteMenu items={items} scale={1.7} />
+    </div>
   );
 }
