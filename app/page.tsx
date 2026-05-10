@@ -36,9 +36,6 @@ export default function Home() {
     // </div>
 
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-6xl md:text-8xl font-extrabold mb-4 text-center">
-        Alma Creatia Studio
-      </h1>
       <img
         src="/almavreatiocircular.png"
         alt="Alma Creatia Studio Logo"
@@ -46,6 +43,33 @@ export default function Home() {
       />
       <p className="text-xl md:text-3xl text-gray-400 text-center">
         Página en Construcción
+      </p>
+      <p>En breve estará disponible</p>
+      <p>
+        <a
+          href="mailto:juan@almacreatiastudio.work"
+          className="text-blue-400 hover:text-blue-300"
+        >
+          juan@almacreatiastudio.work
+        </a>
+      </p>
+      <p>
+        <a
+          href="mailto:jeannette@almacreatiastudio.work"
+          className="text-blue-400 hover:text-blue-300"
+        >
+          jeannette@almacreatiastudio.work
+        </a>
+      </p>
+      <p>
+        <a
+          href="https://wa.me/5511980111193"
+          className="text-blue-400 hover:text-blue-300"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contáctanos por WhatsApp
+        </a>
       </p>
     </div>
   );
