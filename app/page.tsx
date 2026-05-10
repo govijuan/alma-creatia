@@ -30,8 +30,23 @@ const items = [
 
 export default function Home() {
   return (
-    <div style={{ height: "100vh", position: "relative" }}>
-      <InfiniteMenu items={items} scale={1.7} />
+    // <div style={{ height: "100vh", position: "relative" }}>
+
+    //   {/*<InfiniteMenu items={items} scale={1.7} />*/}
+    // </div>
+
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <h1 className="text-6xl md:text-8xl font-extrabold mb-4 text-center">
+        Alma Creatia Studio
+      </h1>
+      <img
+        src="/almavreatiocircular.png"
+        alt="Alma Creatia Studio Logo"
+        className="mx-auto my-8 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl"
+      />
+      <p className="text-xl md:text-3xl text-gray-400 text-center">
+        Página en Construcción
+      </p>
     </div>
   );
 }
