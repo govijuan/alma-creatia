@@ -1,11 +1,15 @@
 services:
-  react-app:
+  alma-creatia:
     image: ghcr.io/govijuan/alma-creatia:latest
     container_name: alma-creatia
     networks:
       reverse-proxy_default:
         aliases: []
     restart: unless-stopped
+    # ports:                    # ← Comment out or remove for production with NPM
+    #   - "3001:3000"
+    expose:
+      - "3000" # This is enough for internal networking
 networks:
   reverse-proxy_default:
     external: true
