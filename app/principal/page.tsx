@@ -73,6 +73,31 @@ const Principal = () => {
           </a>
         </div>
       </section>
+      <section className="bg-lead-blue flex flex-col items-center text-gray-100 justify-center py-20 w-full">
+        <div className="flex">
+          <div className="flex-1"></div>
+          <div className="flex-2">
+            <p className="mb-4">
+              Integramos estrategia, diseño creativo y tecnología de vanguardia
+              para startups, emprendedores y empresas medianas que quieren
+              destacar con su voz
+            </p>
+            <p>
+              Convertimos ideas en marcas resonantes que conectan emocionalmente
+              y generan confianza
+            </p>
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex mt-8">
+          <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300 mr-2">
+            SERVICIOS
+          </a>
+          <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300">
+            CALCULADOR DE COTIZACIÓN
+          </a>
+        </div>
+      </section>
       <h1 className="text-4xl font-bold mb-4">Bienvenido a Alma Creatia</h1>
       <p className="text-lg text-gray-600 mb-8">
         Tu espacio de creatividad e innovación
