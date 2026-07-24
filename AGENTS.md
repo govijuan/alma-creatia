@@ -177,7 +177,29 @@ Use these compact tokens when briefing AI agents:
 - **Key component**: `InfiniteMenu.tsx` (gl-matrix animation)
 
 ### Suggested briefing template for agents
-> "This is a Next.js 16 App-Router project (TS strict, Tailwind v4, shadcn/ui). Use `@/*` imports and `cn()` for classes. Keep Server Components unless interactivity is needed. After edits, run `npm run lint` and `npm run build`."
+> "This is a Next.js 16 App-Router project (TS strict, Tailwind v4, shadcn/ui). Use `@/*` imports and `cn()` for classes. Keep Server Components unless interactivity is needed. After edits, run `npm run lint` and `npm run build`.
+
+## PI Agent File Context
+
+This section provides context specific to the PI agent's understanding of the project:
+
+- **Configuration Files**: `.pi/settings.json` (global PI configuration), theme extensions in `.pi/git/`
+- **Key Focus Files**: PI agent prioritizes watching `AGENTS.md`, `README.md`, `app/`, `components/`, `lib/`, `next.config.ts`, `tsconfig.json`, and `package.json`
+- **Build Artifacts**: PI agent ignores `node_modules/` and `.next/` directories, relying on `package.json` for dependency tracking
+- **Usage**: This file (`AGENTS.md`) serves as the root documentation for all agents including PI
+
+## Zed IDE File Context
+
+This section provides context specific to Zed IDE's understanding of the project:
+
+- **Workspace Organization**: Zed groups files by feature/module (app routing, components, UI primitives, utilities, configuration)
+- **Code Lens & Navigation**: Provides semantic understanding of server vs client components, route entry points, and component dependencies
+- **Quick Access Patterns**: 
+  - Open files: `Cmd+P` → `app/servicios` for section pages
+  - Go to definition: `Cmd+Click` on imports in components
+  - Utilities: `Cmd+P` → `lib/utils.ts` for `cn` helper
+- **Navigation Map**: Shows hierarchical routes from home (`/`) through layout to section pages (`/principal`, `/servicios`) with their respective components
+- **Dependency Graph**: Highlights key relationships like `InfiniteMenu.tsx` → `gl-matrix` (external) + `lib/utils.ts` (class merging)
 
 ---
 
