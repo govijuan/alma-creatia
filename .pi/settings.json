@@ -1,13 +1,3 @@
 {
-  "theme": "harpy-insone",
-  "packages": [
-    "npm:harpy-theme",
-    "git:github.com/justinclayton/pi-marathon-theme",
-    "npm:@llttlltt/poimandres-pi"
-  ],
-  "contextFiles": [
-    "docs/pi_context.md",
-    "docs/zed_context.md"
-  ]
-
+  "theme": "ameno-cyberdyne"
 }
