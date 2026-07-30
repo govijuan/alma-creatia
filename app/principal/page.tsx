@@ -3,11 +3,11 @@
 import LogoTxt from "@/components/logo-txt";
 import PageTitle from "@/components/pageTitle";
 import ArrowDown from "@/components/ui/ArrowDown";
-import ScrollStack, { ScrollStackItem } from '@/components/ui/ScrollStack';
+import {useScroll, motion} from "framer-motion"
 
 const Principal = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="relative flex flex-col items-center h-screen w-screen">
       {/*
         SECTION 1: The Video Header
         - Fixed or Sticky to stay in place while others scroll over.
@@ -15,10 +15,10 @@ const Principal = () => {
       */}
       <section
         id="top-section"
-        className="relative w-full overflow-hidden z-10 top-0 text-white"
+        className="fixed w-full overflow-hidden  top-0 text-white"
       >
         <video
-          className="fixed top-0 left-0 w-full h-screen object-cover"
+          className="fixed  inset-0 w-full h-screen object-cover z-0"
           autoPlay
           loop
           muted
@@ -26,10 +26,8 @@ const Principal = () => {
           <source src="/backgrounds/buceadoras-perlas.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-black/50"></div>
-        <ScrollStack useWindowScroll={true} >
-        <ScrollStackItem itemClassName="text-white" isTop={true}>
-        {/*<div className="relative z-20 flex flex-col justify-center h-full text-white w-full px-4 pb-4">*/}
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+        <div className="relative z-10 flex flex-col justify-center h-screen text-white w-full px-4 pb-4">
           <div className="flex flex-col h-full w-full">
             <div className="flex justify-center"><LogoTxt /></div>
             <PageTitle title="INICIO" />
@@ -43,41 +41,33 @@ const Principal = () => {
               <ArrowDown size={48} color="white" bounceDuration="1.5s" targetId="bienvenidos" />
             </div>
           </div>
-          </ScrollStackItem>
-          <ScrollStackItem>
-            <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
-              <div className="flex-2">
-                <h2 className="text-3xl font-bold mb-4">Bienvenidos</h2>
-                <p className="mb-4 text-lg">
-                  Creamos marcas diseñadas para quedarse en la mente y el corazón de
-                  las personas como extensión (resultado) del alma que crea
-                </p>
-                <p>
-                  Guiados por la filosofía de Alma Creatia, las ideas actúan como
-                  una fuerza flexible y complementaria
-                </p>
-              </div>
-            </div>
-            <div className="flex mt-8 justify-center">
-              <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
-                Metodología Inside Out
-              </a>
-            </div>
-          </ScrollStackItem>
-          <ScrollStackItem>
-            <h2>Card 2</h2>
-            <p>This is the second card in the stack</p>
-          </ScrollStackItem>
-          <ScrollStackItem>
-            <h2>Card 3</h2>
-            <p>This is the third card in the stack</p>
-          </ScrollStackItem>
-        </ScrollStack>
-        {/*<div className="relative z-21 flex flex-col justify-center h-full text-white w-full px-4 pb-4">
-
-
-        </div>*/}
+        </div>
       </section>
+      <motion.section
+        initial={{ backdropFilter: "none" }}
+        whileInView={{ backdropFilter: "blur(50px)" }}
+        viewport={{ amount: "all" }}
+        id="bienvenidos"
+        className="relative w-9/10 h-5/10 top-25/100 rounded-4xl bg-black/30 backdrop-blur-lg text-white flex flex-col items-center justify-center overflow-hidden translate-y-150/100">
+        <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
+          <div className="flex-2">
+            <h2 className="text-3xl font-bold mb-4">Bienvenidos</h2>
+            <p className="mb-4 text-lg">
+              Creamos marcas diseñadas para quedarse en la mente y el corazón de
+              las personas como extensión (resultado) del alma que crea
+            </p>
+            <p>
+              Guiados por la filosofía de Alma Creatia, las ideas actúan como
+              una fuerza flexible y complementaria
+            </p>
+          </div>
+        </div>
+        <div className="flex mt-8 justify-center">
+          <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
+            Metodología Inside Out
+          </a>
+        </div>
+      </motion.section>
 
 
       {/*

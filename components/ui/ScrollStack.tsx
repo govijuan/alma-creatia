@@ -43,7 +43,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   itemDistance = 100,
   itemScale = 0.03,
   itemStackDistance = 30,
-  stackPosition = '20%',
+  stackPosition = '10%',
   scaleEndPosition = '10%',
   baseScale = 0.85,
   scaleDuration = 0.5,
@@ -151,7 +151,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       let translateY = 0;
       const isPinned = scrollTop >= pinStart && scrollTop <= pinEnd;
 
-      if (isPinned) {
+      // Top card (index 0, isTop=true) stays fixed at container top as background
+      // Other cards stack on top of it
+      if (i === 0) {
+        translateY = 0;
+      } else if (isPinned) {
         translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i;
       } else if (scrollTop > pinEnd) {
         translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i;
@@ -339,7 +343,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         willChange: 'scroll-position'
       }}
     >
-      <div className="scroll-stack-inner pt-[20vh] px-20 pb-[50rem] min-h-screen">
+      <div className="scroll-stack-inner px-20 min-h-screen">
         {children}
         {/* Spacer so the last pin can release cleanly */}
         <div className="scroll-stack-end w-full h-px" />

@@ -21,7 +21,7 @@
 
 ### Key Conventions
 1. **Routing**: File-system routing under `app/` (e.g. `app/page.tsx`, `app/servicios/page.tsx`)
-2. **Typography**: Custom fonts via `next/font` (Geist) in `app/fonts.ts`
+2. **Typography**: Custom fonts via `next/font` (Geist, Montserrat) in `app/fonts.ts`
 3. **Component Layout**: Atomic structure with `components/ui/` for primitives
 4. **Layouts**: Server-component root layout (`app/layout.tsx`)
 5. **Imports**: Use the `@/*` path alias (maps to project root) per `tsconfig.json`
@@ -29,7 +29,7 @@
 
 ### External Dependencies
 - **UI**: `lucide-react`, `class-variance-authority`, `tailwind-merge`, `tw-animate-css`
-- **Math/Animation**: `gl-matrix` (used by `InfiniteMenu.tsx`)
+- **Math/Animation**: `gl-matrix` (used by `InfiniteMenu.tsx`), `lenis` (smooth scrolling for ScrollStack)
 - **Accessibility**: Radix UI via `shadcn`
 
 ---
@@ -83,7 +83,7 @@ Automatic deployment to Contabo VPS via GitHub Actions (`.github/workflows/deplo
 ```
 .
 ├── app/                     # App Router
-│   ├── fonts.ts            # Font configuration (Geist)
+│   ├── fonts.ts            # Font configuration (Geist, Montserrat)
 │   ├── globals.css         # Tailwind base + theme tokens
 │   ├── layout.tsx          # Root layout (metadata, fonts, providers)
 │   ├── page.tsx            # Home page
@@ -94,7 +94,7 @@ Automatic deployment to Contabo VPS via GitHub Actions (`.github/workflows/deplo
 │   ├── MenuPageHeader.tsx  # Section header
 │   ├── logo-txt.tsx        # Logo text
 │   ├── pageTitle.tsx       # Reusable page title
-│   └── ui/                 # Primitives (e.g. ArrowDown.tsx)
+│   └── ui/                 # Primitives (e.g. ArrowDown.tsx, ScrollStack.tsx)
 ├── lib/
 │   └── utils.ts            # cn() class-merge helper
 ├── public/                 # Static assets (served as-is)
@@ -174,7 +174,7 @@ Use these compact tokens when briefing AI agents:
 - **Client boundary**: add `"use client"` only for interactivity
 - **Build**: `output:"standalone"` → Docker/nginx ready
 - **Sections**: `app/principal`, `app/servicios`, home `app/page.tsx`
-- **Key component**: `InfiniteMenu.tsx` (gl-matrix animation)
+- **Key components**: `InfiniteMenu.tsx` (gl-matrix animation), `ScrollStack.tsx` (lenis scroll animations)
 
 ### Suggested briefing template for agents
 > "This is a Next.js 16 App-Router project (TS strict, Tailwind v4, shadcn/ui). Use `@/*` imports and `cn()` for classes. Keep Server Components unless interactivity is needed. After edits, run `npm run lint` and `npm run build`.
@@ -199,8 +199,175 @@ This section provides context specific to Zed IDE's understanding of the project
   - Go to definition: `Cmd+Click` on imports in components
   - Utilities: `Cmd+P` → `lib/utils.ts` for `cn` helper
 - **Navigation Map**: Shows hierarchical routes from home (`/`) through layout to section pages (`/principal`, `/servicios`) with their respective components
-- **Dependency Graph**: Highlights key relationships like `InfiniteMenu.tsx` → `gl-matrix` (external) + `lib/utils.ts` (class merging)
+- **Dependency Graph**: Highlights key relationships like `InfiniteMenu.tsx` → `gl-matrix` (external) + `lib/utils.ts` (class merging), `ScrollStack.tsx` → `lenis` (smooth scroll) + `lib/utils.ts`
 
 ---
 
-*Persistent source of truth for AI agents and IDE integrations. Generated 2026-07-16.*
+## SCROLLSTACK COMPONENT DOCUMENTATION
+
+### Overview
+`ScrollStack.tsx` (`components/ui/ScrollStack.tsx`) implements a scroll-driven card stacking animation using **Lenis** for smooth scrolling. Cards scale down, translate, rotate, and blur as they stack on top of each other during scroll.
+
+### Key Files
+- **Component**: `components/ui/ScrollStack.tsx`
+- **Usage**: `app/principal/page.tsx` (with `useWindowScroll={true}`)
+- **Dependencies**: `lenis` (smooth scroll), React hooks
+
+### Architecture
+
+#### ScrollStackItem (Lines 11-22)
+```tsx
+export const ScrollStackItem: React.FC<ScrollStackItemProps> = ({ children, itemClassName = '', isTop = false })
+```
+- **Props**: `itemClassName`, `children`, `isTop` (first card gets full-screen layout)
+- **Renders**: `div.scroll-stack-card` with `will-change-transform`, `transform-style: preserve-3d`
+- **Styles**: `isTop` → `h-screen flex flex-col justify-center`; else → `h-80 my-8 p-12 rounded-[40px] shadow`
+
+#### ScrollStack Props (Lines 24-38)
+| Prop | Default | Description |
+|------|---------|-------------|
+| `itemDistance` | 100 | Pixel gap between cards (margin-bottom) |
+| `itemScale` | 0.03 | Scale reduction per card index |
+| `itemStackDistance` | 30 | Vertical offset between stacked cards |
+| `stackPosition` | `'10%'` | Viewport % where card starts pinning |
+| `scaleEndPosition` | `'10%'` | Viewport % where card reaches target scale |
+| `baseScale` | 0.85 | Minimum scale for first stacked card |
+| `scaleDuration` | 0.5 | (Unused) Animation duration placeholder |
+| `rotationAmount` | 0 | Rotation degrees per card per progress |
+| `blurAmount` | 0 | Blur px per card depth in stack |
+| `useWindowScroll` | false | Use `window.scrollY` vs internal scroller |
+| `onStackComplete` | undefined | Callback when last card pins |
+
+#### Refs & State (Lines 55-61)
+```tsx
+const scrollerRef = useRef<HTMLDivElement>(null)        // Internal scroll container
+const stackCompletedRef = useRef(false)                  // Prevents duplicate callbacks
+const animationFrameRef = useRef<number | null>(null)    // RAF loop for Lenis
+const lenisRef = useRef<Lenis | null>(null)              // Lenis instance
+const cardsRef = useRef<HTMLElement[]>([])               // Card DOM nodes
+const lastTransformsRef = useRef(new Map<number, any>()) // Transform cache
+const isUpdatingRef = useRef(false)                      // Re-entrancy guard
+```
+
+#### Core Functions
+
+**`calculateProgress(scrollTop, start, end)`** (Lines 63-67)
+- Returns 0-1 progress between start/end scroll positions
+- Clamped: <start = 0, >end = 1
+
+**`parsePercentage(value, containerHeight)`** (Lines 69-74)
+- Converts `'10%'` strings to pixels using container height
+- Passes through numbers
+
+**`getScrollData()`** (Lines 76-91)
+- Returns `{ scrollTop, containerHeight, scrollContainer }`
+- `useWindowScroll=true`: uses `window.scrollY`, `window.innerHeight`, `document.documentElement`
+- `useWindowScroll=false`: uses `scrollerRef.current.scrollTop`, `clientHeight`, ref
+
+**`getElementOffset(element)`** (Lines 93-103)
+- `useWindowScroll=true`: `getBoundingClientRect().top + window.scrollY`
+- `useWindowScroll=false`: `element.offsetTop`
+
+**`updateCardTransforms()`** (Lines 105-196) — **Main Animation Logic**
+1. Gets scroll data, converts percentage positions to pixels
+2. Finds `.scroll-stack-end` element for pin release calculation
+3. For each card (index `i`):
+   - **Trigger positions**:
+     - `triggerStart = cardTop - stackPositionPx - itemStackDistance * i`
+     - `triggerEnd = cardTop - scaleEndPositionPx`
+     - `pinStart = triggerStart` (same as triggerStart)
+     - `pinEnd = endElementTop - containerHeight / 2`
+   - **Scale**: `scale = 1 - progress * (1 - targetScale)` where `targetScale = baseScale + i * itemScale`
+   - **Rotation**: `rotation = i * rotationAmount * progress`
+   - **Blur**: Cards below top card get `blur = depthInStack * blurAmount`
+   - **TranslateY**:
+     - If pinned: `translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i`
+     - If past pinEnd: locked at `pinEnd - cardTop + stackPositionPx + itemStackDistance * i`
+   - **Transform**: `translate3d(0, translateY, 0) scale(scale) rotate(rotation)`
+   - **Filter**: `blur(blur)` if blur > 0
+   - **Optimization**: Only applies if values changed > threshold (0.1px, 0.001 scale, 0.1deg, 0.1px blur)
+   - **Stack Complete**: Fires `onStackComplete` when last card enters/exits pin range
+
+**`handleScroll()`** (Lines 213-215)
+- Debounced scroll handler → calls `updateCardTransforms()`
+
+**`setupLenis()`** (Lines 217-271)
+- Creates Lenis instance with smooth scroll config:
+  - `duration: 1.2`, custom easing, `lerp: 0.1`
+  - Touch/wheel multipliers, sync touch
+- **Window mode**: Lenis on `window`, RAF loop on `lenis.raf()`
+- **Container mode**: Lenis on `scrollerRef` with `.scroll-stack-inner` content
+- Attaches `handleScroll` to Lenis `on('scroll')`
+- Starts RAF loop
+
+**`useLayoutEffect`** (Lines 273-327) — **Initialization & Cleanup**
+1. Queries all `.scroll-stack-card` elements (window or container)
+2. Sets initial styles on each card:
+   - `marginBottom: itemDistance` (except last)
+   - `willChange: transform, filter`
+   - `transformOrigin: top center`
+   - `backfaceVisibility: hidden`
+   - `transform: translateZ(0)` (GPU layer)
+   - `perspective: 1000px` (3D context)
+3. Calls `setupLenis()` and initial `updateCardTransforms()`
+4. **Cleanup**: Cancels RAF, destroys Lenis, clears refs
+
+#### Render (Lines 329-348)
+```tsx
+<div ref={scrollerRef} className="relative w-full h-full overflow-y-auto overflow-x-visible" style={{...}}>
+  <div className="scroll-stack-inner px-20 min-h-screen">
+    {children}
+    <div className="scroll-stack-end w-full h-px" />  {/* Pin release spacer */}
+  </div>
+</div>
+```
+- Container styles: `overscrollBehavior: contain`, `scrollBehavior: smooth`, GPU transforms
+- Inner wrapper: horizontal padding, minimum screen height
+- End spacer: 1px tall div for clean pin release
+
+---
+
+### Usage in `app/principal/page.tsx`
+
+```tsx
+<ScrollStack useWindowScroll={true}>
+  <ScrollStackItem itemClassName="text-white" isTop={true}>
+    {/* Hero content: Logo, PageTitle, ArrowDown */}
+  </ScrollStackItem>
+  <ScrollStackItem>
+    {/* Bienvenidos section */}
+  </ScrollStackItem>
+  <ScrollStackItem>
+    <h2>Card 2</h2>
+  </ScrollStackItem>
+  <ScrollStackItem>
+    <h2>Card 3</h2>
+  </ScrollStackItem>
+</ScrollStack>
+```
+
+**Current Issues**:
+1. `useWindowScroll={true}` but video background is `fixed` — may cause z-index conflicts
+2. Video section has `z-10` but ScrollStack cards need to stack *over* it
+3. No explicit height on ScrollStack container when using window scroll
+4. `px-20` on inner wrapper may cause horizontal overflow on mobile
+
+**Recommended Fixes**:
+```tsx
+// In page.tsx - ensure proper stacking context
+<section className="relative w-full h-screen">  {/* Video section */}
+  <video className="fixed inset-0 w-full h-full object-cover" ... />
+  <div className="absolute inset-0 bg-black/50" />
+  
+  <ScrollStack useWindowScroll={true} className="relative z-20 h-full">
+    {/* Cards will stack over video */}
+  </ScrollStack>
+</section>
+
+// In ScrollStack.tsx - responsive padding
+<div className="scroll-stack-inner px-4 md:px-20 min-h-screen">
+```
+
+---
+
+*Persistent source of truth for AI agents and IDE integrations. Updated 2026-07-28.*
