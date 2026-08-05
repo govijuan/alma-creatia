@@ -1,176 +1,260 @@
-"use client"; // Required for framer-motion hooks
+"use client";
 
 import LogoTxt from "@/components/logo-txt";
 import PageTitle from "@/components/pageTitle";
 import ArrowDown from "@/components/ui/ArrowDown";
-import {useScroll, motion, useTransform, useMotionTemplate} from "framer-motion"
+import {
+  useScroll,
+  motion,
+  useTransform,
+  useMotionTemplate,
+  MotionValue,
+} from "framer-motion";
 import { useRef } from "react";
 
+const sections = [
+  {
+    id: "bienvenidos",
+    color: "#1E293B",
+    content: (
+      <>
+        <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-4">Bienvenidos</h2>
+            <p className="mb-4 text-lg">
+              Creamos marcas diseñadas para quedarse en la mente y el corazón de
+              las personas como extensión (resultado) del alma que crea
+            </p>
+            <p>
+              Guiados por la filosofía de Alma Creatia, las ideas actúan como
+              una fuerza flexible y complementaria
+            </p>
+          </div>
+        </div>
+        <div className="flex mt-8 justify-center">
+          <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
+            Metodología Inside Out
+          </a>
+        </div>
+      </>
+    ),
+  },
+  {
+    color: "#0F172A",
+    content: (
+      <>
+        <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-4">Nuestra Esencia</h2>
+            <p className="mb-4 text-lg">
+              Integramos estrategia, diseño creativo y tecnología de vanguardia
+              para startups, emprendedores y empresas medianas que quieren
+              destacar con su voz
+            </p>
+            <p>
+              Convertimos ideas en marcas resonantes que conectan emocionalmente
+              y generan confianza
+            </p>
+          </div>
+        </div>
+        <div className="flex mt-8 gap-2 justify-center">
+          <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300">
+            SERVICIOS
+          </a>
+          <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300">
+            CALCULADOR DE COTIZACIÓN
+          </a>
+        </div>
+      </>
+    ),
+  },
+  {
+    color: "#1E293B",
+    content: (
+      <>
+        <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-4">Proyectos Destacados</h2>
+            <p className="mb-4 text-lg">
+              Descubre algunos de nuestros proyectos más destacados, donde la
+              creatividad y la innovación se unen para crear experiencias
+              únicas.
+            </p>
+            <p>
+              Cada proyecto refleja nuestra pasión por el diseño y la
+              estrategia, ofreciendo soluciones que impactan y conectan con las
+              audiencias.
+            </p>
+          </div>
+        </div>
+        <div className="flex mt-8 justify-center">
+          <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
+            VER PROYECTOS
+          </a>
+        </div>
+      </>
+    ),
+  },
+];
+
 const Principal = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
-    <div className="relative flex flex-col items-center h-screen w-screen">
-      {/*
-        SECTION 1: The Video Header
-        - Fixed or Sticky to stay in place while others scroll over.
-        - We use 'sticky' here so it stays until covered.
-      */}
-      <section
-        id="top-section"
-        className="fixed w-full overflow-hidden  top-0 text-white"
-      >
+    <div className="relative w-screen">
+      {/* VIDEO HEADER */}
+      <section className="fixed inset-0 w-full h-screen overflow-hidden text-white z-0">
         <video
-          className="fixed  inset-0 w-full h-screen object-cover z-0"
+          className="absolute inset-0 w-full h-full object-cover"
           autoPlay
           loop
           muted
+          playsInline
         >
           <source src="/backgrounds/buceadoras-perlas.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-black/50 z-0"></div>
-        <div className="relative z-10 flex flex-col justify-center h-screen text-white w-full px-4 pb-4">
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 flex flex-col justify-center h-full text-white w-full px-4 pb-4">
           <div className="flex flex-col h-full w-full">
-            <div className="flex justify-center"><LogoTxt /></div>
+            <div className="flex justify-center">
+              <LogoTxt />
+            </div>
             <PageTitle title="INICIO" />
             <div className="flex justify-center pb-4">
               <div className="flex flex-col">
-                <div className="text-2xl text-center">Estudio Creativo & Digital</div>
+                <div className="text-2xl text-center">
+                  Estudio Creativo & Digital
+                </div>
                 <div className="text-2xl text-center">ALMACREATIASTUDIO</div>
               </div>
             </div>
             <div className="flex justify-center">
-              <ArrowDown size={48} color="white" bounceDuration="1.5s" targetId="bienvenidos" />
+              <ArrowDown
+                size={48}
+                color="white"
+                bounceDuration="1.5s"
+                targetId="bienvenidos"
+              />
             </div>
           </div>
         </div>
       </section>
-      <div className="relative mt-[100vh]">
-        <div className="h-[20vh]" />
-          <StickySection index={0} total={3} color="#1E293B">
-            <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
-              <div className="flex-2">
-                <h2 className="text-3xl font-bold mb-4">Bienvenidos</h2>
-                <p className="mb-4 text-lg">
-                  Creamos marcas diseñadas para quedarse en la mente y el corazón de
-                  las personas como extensión (resultado) del alma que crea
-                </p>
-                <p>
-                  Guiados por la filosofía de Alma Creatia, las ideas actúan como
-                  una fuerza flexible y complementaria
-                </p>
-              </div>
-            </div>
-            <div className="flex mt-8 justify-center">
-              <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
-                Metodología Inside Out
-              </a>
-            </div>
-        </StickySection>
-        <StickySection index={1} total={3} color="#0F172A">
-          <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
-            <div className="flex-2">
-              <h2 className="text-3xl font-bold mb-4">Nuestra Esencia</h2>
-              <p className="mb-4 text-lg">
-                Integramos estrategia, diseño creativo y tecnología de vanguardia
-                para startups, emprendedores y empresas medianas que quieren
-                destacar con su voz</p>
-              <p>
-                Convertimos ideas en marcas resonantes que conectan emocionalmente
-                y generan confianza
-              </p>
-            </div>
-          </div>
-          <div className="flex mt-8 gap-2 justify-center">
-            <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300">
-              SERVICIOS
-            </a>
-            <a className="px-6 py-3 bg-cyan-50 text-gray-600 rounded-full hover:bg-gray-400 transition duration-300">
-              CALCULADOR DE COTIZACIÓN
-            </a>
-          </div>
-        </StickySection>
-        <StickySection index={2} total={3} color="#1E293B">
-          <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
-            <div className="flex-2">
-              <h2 className="text-3xl font-bold mb-4">Proyectos Destacados</h2>
-              <p className="mb-4 text-lg">
-                Descubre algunos de nuestros proyectos más destacados, donde la creatividad y la innovación se unen para crear experiencias únicas.
-              </p>
-              <p>
-                Cada proyecto refleja nuestra pasión por el diseño y la estrategia, ofreciendo soluciones que impactan y conectan con las audiencias.
-              </p>
-            </div>
-          </div>
-          <div className="flex mt-8 justify-center">
-            <a className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
-              VER PROYECTOS
-            </a>
-          </div>
-        </StickySection>
-        <div className="h-[50vh]" />
+
+      {/*
+        Scroll container
+        - mt-[100vh] → full video visible first
+        - height gives each card a full viewport of scroll room
+      */}
+      <div
+        ref={containerRef}
+        className="relative mt-[100vh]"
+        style={{ height: `${sections.length * 100}vh` }}
+      >
+        {sections.map((section, i) => (
+          <FixedCard
+            key={i}
+            index={i}
+            total={sections.length}
+            color={section.color}
+            id={section.id}
+            scrollYProgress={scrollYProgress}
+          >
+            {section.content}
+          </FixedCard>
+        ))}
       </div>
+
+      <div className="h-[50vh]" />
     </div>
   );
 };
 
-const StickySection = ({ index, total, children, color, }: { index: number; total: number; children: React.ReactNode, color: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
+function FixedCard({
+  index,
+  total,
+  color,
+  children,
+  id,
+  scrollYProgress,
+}: {
+  index: number;
+  total: number;
+  color: string;
+  children: React.ReactNode;
+  id?: string;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const segment = 1 / total;
 
-    // Track when this section is approaching / reaching the sticky point
-    const { scrollYProgress } = useScroll({
-      target: ref,
-      // "start end" → section enters viewport
-      // "start start" → section reaches the top (sticky position)
-      offset: ["start end", "start start"],
-    });
+  // Timeline for this card
+  const enterStart = index * segment;           // card starts entering
+  const lockPoint = enterStart + segment * 0.4; // card reaches 60px and locks
+  const fadeStart = enterStart + segment * 0.75;// next card is covering it
+  const fadeEnd = enterStart + segment;         // fully gone
 
-    // Scale & opacity (optional polish)
-    const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
-    const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [0.75, 1, 1]);
+  // Y animation: comes from below → locks at 60px
+  const y = useTransform(
+    scrollYProgress,
+    [enterStart, lockPoint, fadeEnd],
+    ["110vh", "60px", "60px"]
+  );
 
-    // Blur amount: 0 → 16px as it becomes sticky
-    const blur = useTransform(scrollYProgress, [0.4, 1], [0, 16]);
+  // Opacity: invisible → fully visible → stays → fades out
+  const opacity = useTransform(
+    scrollYProgress,
+    [enterStart, enterStart + segment * 0.15, fadeStart, fadeEnd],
+    [0, 1, 1, 0]
+  );
 
-    // Background opacity for the frosted effect
-    const bgOpacity = useTransform(scrollYProgress, [0.4, 1], [1, 0.45]);
+  // Blur + frosted background only after locking
+  const blur = useTransform(
+    scrollYProgress,
+    [lockPoint - segment * 0.1, lockPoint],
+    [0, 16]
+  );
+  const bgOpacity = useTransform(
+    scrollYProgress,
+    [lockPoint - segment * 0.1, lockPoint],
+    [0.95, 0.4]
+  );
 
-    // Dynamic styles
-    const backdropFilter = useMotionTemplate`blur(${blur}px)`;
-    const backgroundColor = useTransform(
-      bgOpacity,
-      (o) => {
-        // Convert hex color to rgba with dynamic opacity
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${o})`;
-      }
-    );
+  const backdropFilter = useMotionTemplate`blur(${blur}px)`;
+  const backgroundColor = useTransform(bgOpacity, (o) => {
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${o})`;
+  });
+
   return (
-    <div ref={ref} className="h-[100vh] relative">
-          <motion.div
-            style={{
-              scale,
-              opacity,
-              top: 60,                    // sticky position
-              zIndex: index + 1,
-              backdropFilter,             // the blur
-              backgroundColor,            // transparent version of original color
-              // Optional: slight offset for a more stacked look
-              // top: `calc(60px + ${index * 10}px)`,
-            }}
-            className="sticky w-full h-[80vh] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-          >
-            <div className="w-full h-full flex flex-col justify-center items-center p-10 text-white">
-              {children}
-              <span className="mt-8 text-sm opacity-60">
-                {index + 1} / {total}
-              </span>
-            </div>
-          </motion.div>
-    </div>
-  )
+    <motion.div
+      id={id}
+      style={{
+        y,
+        opacity,
+        backdropFilter,
+        backgroundColor,
+        zIndex: index + 10,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+      }}
+      className="w-full h-[75vh] rounded-2xl overflow-hidden shadow-2xl border border-white/10 pointer-events-none"
+    >
+      <div className="w-full h-full flex flex-col justify-center items-center p-10 text-white pointer-events-auto">
+        {children}
+        <span className="mt-8 text-sm opacity-60">
+          {index + 1} / {total}
+        </span>
+      </div>
+    </motion.div>
+  );
 }
 
 export default Principal;
