@@ -375,4 +375,9 @@ const isUpdatingRef = useRef(false)                      // Re-entrancy guard
 
 ---
 
+## TASK MANAGEMENT
+Check TODO.md at the start of each session for pending work. Update it as tasks are completed or added.
+
+---
+
 *Persistent source of truth for AI agents and IDE integrations. Updated 2026-07-28.*

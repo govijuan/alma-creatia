@@ -7,9 +7,9 @@ const Principal = () => {
     <div className="relative w-screen">
       <PageVideoHeader videoSrc="/backgrounds/buceadoras-perlas.mp4" pageTitle="INICIO" targetId="bienvenidos" />
       <div
-        className="mt-[100vh] h-[500vh]"
+        className="mt-[100vh] h-[500vh] flex flex-col items-center"
       >
-        <StickySection index={0} id="bienvenidos" >
+        <StickySection index={0} id="bienvenidos" blurDistance={100} className="mb-[200px] w-3/4">
           <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
             <div>
               <h2 className="text-3xl font-bold mb-4">Bienvenidos</h2>
@@ -29,7 +29,7 @@ const Principal = () => {
             </a>
           </div>
         </StickySection>
-        <StickySection index={1} id="servicios">
+        <StickySection index={1} id="servicios" blurDistance={100} className="mb-[200px] w-3/4">
           <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
             <div>
               <h2 className="text-3xl font-bold mb-4">Nuestra Esencia</h2>
@@ -53,7 +53,7 @@ const Principal = () => {
             </a>
           </div>
         </StickySection>
-        <StickySection index={2} id="proyectos">
+        <StickySection index={2} id="proyectos" blurDistance={100} className="w-3/4">
           <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
             <div>
               <h2 className="text-3xl font-bold mb-4">Proyectos Destacados</h2>

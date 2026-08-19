@@ -1,4 +1,9 @@
+---
+name: create-atomic-component
+description: Create atomic UI components following the design system. Use when the user asks to generate a new component, atom, molecule, or reusable UI element.
+---
 # Create Atomic Component Skill
+
 
 This skill allows the Pi Agent to create an atomic component (atom, molecule, or organism) in the Alma Creatia project.
 
