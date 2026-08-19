@@ -63,13 +63,13 @@ const StickySection = ({
   const bg = useTransform(
     progress,
     [0, 1],
-    ["rgba(0,0,0,0)", "rgba(0,0,0,0.35)"]
+    ["rgba(255,255,255,0)", "rgba(255,255,255,0.05)"]
   );
 
   const border = useTransform(
     progress,
     [0, 1],
-    ["rgba(0,0,0,0)", "rgba(0,0,0,0.8)"]
+    ["0.5px solid rgba(255,255,255,0)", "0.5px solid rgba(255,255,255,0.1)"]
   );
 
   return (
