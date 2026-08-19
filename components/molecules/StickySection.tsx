@@ -66,6 +66,12 @@ const StickySection = ({
     ["rgba(0,0,0,0)", "rgba(0,0,0,0.35)"]
   );
 
+  const border = useTransform(
+    progress,
+    [0, 1],
+    ["rgba(0,0,0,0)", "rgba(0,0,0,0.8)"]
+  );
+
   return (
     <motion.div
       ref={ref}
@@ -75,8 +81,9 @@ const StickySection = ({
         backdropFilter: blur,
         WebkitBackdropFilter: blur,
         backgroundColor: bg,
+        border: border,
       }}
-      className={`sticky top-1/8 h-[75vh] rounded-2xl overflow-hidden shadow-2xl border border-white/10 pointer-events-none ${className}`}
+      className={`sticky top-1/8 h-[75vh] rounded-2xl overflow-hidden pointer-events-none ${className}`}
     >
       <div className="w-full h-full flex flex-col justify-center items-center p-10 text-white pointer-events-auto">
         {children}
