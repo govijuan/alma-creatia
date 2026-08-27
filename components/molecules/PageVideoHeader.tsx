@@ -10,7 +10,7 @@ interface PageVideoHeaderProps {
 
 export default function PageVideoHeader({videoSrc, pageTitle, targetId}: PageVideoHeaderProps) {
   return (
-    <section className="fixed inset-0 w-full h-screen overflow-hidden text-white z-0 test3">
+    <section className="fixed inset-0 w-full h-screen overflow-hidden text-white z-0">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
