@@ -57,8 +57,9 @@ jobs:
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
               cd ${{ secrets.WORK_DIR }} &&
-              echo '=== Pulling latest code from GitHub ===' &&
-              git pull origin ${{ github.ref_name }} &&
+              echo '=== Resetting to match GitHub ===' &&
+              git fetch origin &&
+              git reset --hard origin/${{ github.ref_name }} &&
               echo '=== Pulling latest images ===' &&
               docker compose pull &&
               echo '=== Restarting services ===' &&
