@@ -28,7 +28,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }} # Prefer this over custom token
+          password: ${{ secrets.GITHUB_TOKEN }} # Prefer this over custom token
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
