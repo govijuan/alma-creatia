@@ -29,7 +29,7 @@ const Principal = () => {
             </a>
           </div>
         </StickySection>
-        <StickySection index={1} id="servicios" blurDistance={100} className="mb-[200px] w-3/4">
+        <StickySection index={1} id="servicios" blurDistance={100} className="mb-50 w-3/4">
           <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
             <div>
               <h2 className="text-3xl font-bold mb-4">Nuestra Esencia</h2>
