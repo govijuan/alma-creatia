@@ -76,7 +76,7 @@ const Principal = () => {
           </div>
         </StickySection>
       </div>
-      {/*<Footer />*/}
+      <Footer />
     </div>
   );
 };

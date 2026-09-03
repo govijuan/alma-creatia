@@ -9,7 +9,7 @@ export default function Footer({ className = "" }: FooterProps) {
   return (
     <footer
       className={cn(
-        " bg-white dark:bg-gray-900/50",
+        "relative bg-white/90 dark:bg-gray-900/50",
         "text-gray-900 dark:text-gray-100",
         "py-12",
         className
