@@ -2,13 +2,13 @@
 
 import PageVideoHeader from "@/components/molecules/PageVideoHeader";
 import StickySection from "@/components/molecules/StickySection";
-import Footer from "@/components/organisms/Footer";
-
 const Principal = () => {
   return (
     <div className="relative w-screen">
       <PageVideoHeader videoSrc="/backgrounds/buceadoras-perlas.mp4" pageTitle="INICIO" targetId="bienvenidos" />
-      <div className="mt-[100vh] h-[500vh] flex flex-col items-center">
+      <div
+        className="mt-[100vh] h-[500vh] flex flex-col items-center"
+      >
         <StickySection index={0} id="bienvenidos" blurDistance={100} className="mb-[200px] w-3/4">
           <div className="flex w-full max-w-4xl px-4 h-full items-center justify-center text-center">
             <div>
@@ -76,9 +76,8 @@ const Principal = () => {
           </div>
         </StickySection>
       </div>
-      {/*<Footer />*/}
     </div>
   );
-};
+}
 
 export default Principal;

@@ -22,11 +22,7 @@
 ### Key Conventions
 1. **Routing**: File-system routing under `app/` (e.g. `app/page.tsx`, `app/servicios/page.tsx`)
 2. **Typography**: Custom fonts via `next/font` (Geist, Montserrat) in `app/fonts.ts`
-3. **Component Layout**: Atomic design structure with:
-      - `components/atoms/` for atomic components (e.g. logo-txt.tsx, pageTitle.tsx)
-      - `components/molecules/` for molecular components (e.g. StickySection.tsx)
-      - `components/organisms/` for organism components
-      - `components/ui/` for shadcn/ui primitives (e.g. ArrowDown.tsx, ScrollStack.tsx)
+3. **Component Layout**: Atomic structure with `components/ui/` for primitives
 4. **Layouts**: Server-component root layout (`app/layout.tsx`)
 5. **Imports**: Use the `@/*` path alias (maps to project root) per `tsconfig.json`
 6. **Styling**: Utility-first Tailwind; `lib/utils.ts` holds the `cn()` helper (clsx + tailwind-merge)
@@ -96,9 +92,8 @@ Automatic deployment to Contabo VPS via GitHub Actions (`.github/workflows/deplo
 ├── components/             # UI components
 │   ├── InfiniteMenu.tsx    # Custom animated infinite menu (gl-matrix)
 │   ├── MenuPageHeader.tsx  # Section header
-│   ├── atoms/              # Atomic components (e.g. logo-txt.tsx, pageTitle.tsx)
-│   ├── molecules/          # Molecular components (e.g. StickySection.tsx)
-│   ├── organisms/          # Organism components
+│   ├── logo-txt.tsx        # Logo text
+│   ├── pageTitle.tsx       # Reusable page title
 │   └── ui/                 # Primitives (e.g. ArrowDown.tsx, ScrollStack.tsx)
 ├── lib/
 │   └── utils.ts            # cn() class-merge helper
@@ -165,6 +160,7 @@ Automatic deployment to Contabo VPS via GitHub Actions (`.github/workflows/deplo
 ```bash
 git checkout -- <file>   # revert a single file
 git reset --hard HEAD    # full rollback (use with caution)
+```
 
 ---
 
@@ -332,7 +328,6 @@ const isUpdatingRef = useRef(false)                      // Re-entrancy guard
 ---
 
 ### Usage in `app/principal/page.tsx`
-
 ```tsx
 <PageVideoHeader 
   videoSrc="/backgrounds/buceadoras-perlas.mp4" 
@@ -422,16 +417,8 @@ const isUpdatingRef = useRef(false)                      // Re-entrancy guard
     </div>
   </StickySection>
 </div>
+<Footer />
 ```
-```
-
-
-
----
-
-## TASK MANAGEMENT
-Check TODO.md at the start of each session for pending work. Update it as tasks are completed or added.
-
 ---
 
 *Persistent source of truth for AI agents and IDE integrations. Updated 2026-07-28.*

@@ -7,12 +7,9 @@
 - [ ] Create a new page called "AlmaCreatiaTecne" and add its link to the main page's infinite menu, following the same design pattern as the "principal" page
   - Notes: match layout/styling conventions used by `principal` (structure, components, naming)
   - Files: (link relevant files once identified, e.g. `pages/principal.*`, main menu component)
-- [ ] Create a new page called "Idea" that will be a StickySections layout page
-  - Notes: follow the same structure as the principal page with PageVideoHeader and StickySection components
-  - Files: `app/idea/page.tsx`, possibly `app/idea/layout.tsx` if needed, and reuse existing components
 
 ## Done
-- [x] Create Footer organism component and update principal page to use it
+- [x] 
 
 ## Backlog / Ideas
 -
