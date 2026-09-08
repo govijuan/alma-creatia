@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft } from "lucide-react";
+import { FaArrowLeft } from "react-icons/fa6";
 
 interface PageTitleProps {
   title: string;
@@ -10,7 +10,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
     <div className="flex flex-1 justify-start items-center w-full">
       <div className="flex flex-col">
         <div className="flex justify-start mb-3">
-          <ArrowLeft /> volver al menú principal
+          <FaArrowLeft /> volver al menú principal
         </div>
         <h2 className="text-7xl">{title}</h2>
       </div>

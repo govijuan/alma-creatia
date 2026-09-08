@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleArrowDown } from "lucide-react";
+import { FaCircleArrowDown } from "react-icons/fa6";
 import { cn } from "@/lib/utils"; // your cn utility (or just use template literals)
 
 interface AnimatedCircleArrowDownProps {
@@ -51,7 +51,7 @@ export default function ArrowDown({
         className,
       )}
     >
-      <CircleArrowDown
+      <FaCircleArrowDown
         size={size}
         color={color}
         className={cn(
