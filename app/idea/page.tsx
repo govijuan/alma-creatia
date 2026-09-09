@@ -2,6 +2,7 @@
 
 import PageVideoHeader from "@/components/molecules/PageVideoHeader";
 import StickySection from "@/components/molecules/StickySection";
+import Footer from "@/components/organisms/Footer";
 
 const Idea = () => {
   return (
@@ -75,6 +76,7 @@ const Idea = () => {
           </div>
         </StickySection>
       </div>
+      <Footer />
     </div>
   );
 };
