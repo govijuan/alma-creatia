@@ -101,11 +101,14 @@ const StickySection = ({
             {content || children}
           </div>
         </div>
+        {buttonText && buttonLink && (
         <div className="flex mt-8 justify-center">
+
           <a href={buttonLink} className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
             {buttonText}
           </a>
         </div>
+          )}
         {/*<span className="mt-8 text-sm opacity-60">{index + 1}</span>*/}
       </div>
     </motion.div>

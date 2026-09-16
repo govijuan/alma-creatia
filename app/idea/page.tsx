@@ -8,61 +8,50 @@ import Footer from "@/components/organisms/Footer";
 const Idea = () => {
   const IdeaStickySections = [
     {
-      id: "idea",
-      title: "IDEA",
+      id: "transformacion",
+      title: "Transforma tus ideas, insignts y data en una clara dirección de tu proyecto",
       content: (
         <>
-          <p className="mb-4 text-lg">
-            Creamos marcas diseñadas para quedarse en la mente y el corazón de
-            las personas como extensión (resultado) del alma que crea
-          </p>
-          <p>
-            Guiados por la filosofía de Alma Creatia, las ideas actúan como
-            una fuerza flexible y complementaria
+          <p className="mb-4 text-xl">
+            creatividad + estrategia + diseño + tecnología
           </p>
         </>
       ),
-      buttonText: "Metodología Inside Out",
+      buttonText: "CONECTEMOS",
       buttonLink: "#",
     },
     {
-      id: "desarrollo",
-      title: "DESARROLLO",
+      id: "personalidad",
+      title: "Branding es el trabajo intencional de la personalidad de tu marca.",
       content: (
         <>
-          <p className="mb-4 text-lg">
-            Integramos estrategia, diseño creativo y tecnología de vanguardia
-            para startups, emprendedores y empresas medianas que quieren
-            destacar con su voz
-          </p>
-          <p>
-            Convertimos ideas en marcas resonantes que conectan emocionalmente
-            y generan confianza
+          <p className="mb-4 text-xl">
+            Si una Idea es el chispazo inicial,
+            Branding es la personalidad que le da vida a esa chispa. La estrategia es
+            el mapa y la hoja de ruta que lleva tu marca del punto de partida a las metas
           </p>
         </>
       ),
-      buttonText: "Servicios",
+      buttonText: "CONECTEMOS",
       buttonLink: "#",
     },
     {
-      id: "proyectos",
-      title: "PROYECTOS",
+      id: "coherencia",
+      title: "Una marca bien pensadano solo es visualmente coherente.También es intencional",
       content: (
         <>
-          <p className="mb-4 text-lg">
-            Descubre algunos de nuestros proyectos más destacados, donde la
-            creatividad y la innovación se unen para crear experiencias
-            únicas.
+          <p className="mb-4 text-xl">
+            Desde el concepto hasta la creación, tu marca está articulada en su forma de pensar, comunicar y presentarse.
+            La dirección se vuelve más clara y esta cualidad facilita Las decisiones diarias y a largo plazo . Tu branding se define con una voz integrada. Eso es lo que la gente reconoce. Eso es en lo que la gente confía. Eso es lo que la gente recuerda.
           </p>
-          <p>
-            Cada proyecto refleja nuestra pasión por el diseño y la
-            estrategia, ofreciendo soluciones que impactan y conectan con las
-            audiencias.
+          <p className="text-xl">
+            Cuando un fundador aporta una visión, sus valores y una dirección clara el diseño se convierte en una construcción
+            intencional
           </p>
         </>
       ),
-      buttonText: "Ver Proyectos",
-      buttonLink: "#",
+      buttonText: "",
+      buttonLink: "",
     },
   ];
   return (
