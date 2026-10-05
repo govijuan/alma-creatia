@@ -3,6 +3,7 @@
 import PageVideoHeader from "@/components/molecules/PageVideoHeader";
 import StickySection from "@/components/molecules/StickySection";
 import BrandingGrid from "@/components/organisms/BrandingGrid";
+import TallerGrid from "@/components/organisms/TallerGrid";
 import Footer from "@/components/organisms/Footer";
 
 const Idea = () => {
@@ -71,6 +72,7 @@ const Idea = () => {
         ))}
       </div>
       <BrandingGrid />
+      <TallerGrid />
       <Footer />
     </div>
   );

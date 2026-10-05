@@ -17,7 +17,7 @@ const CurveCard = ({ cardContent }: CurveCardProps) => {
   return (
     <div
       className="
-        group relative aspect-square w-full max-w-[220px]
+        group relative aspect-square w-full max-w-55
         overflow-hidden rounded-full
         ring-4 ring-white/80 shadow-xl
         transition-all duration-500 ease-out
@@ -60,7 +60,7 @@ const CurveCard = ({ cardContent }: CurveCardProps) => {
         <h3 className="text-white text-xl font-semibold tracking-tight mb-2">
           {title}
         </h3>
-        <p className="text-white/90 text-sm leading-snug max-w-[180px]">
+        <p className="text-white/90 text-sm leading-snug max-w-45">
           {description}
         </p>
       </div>
