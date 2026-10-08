@@ -48,7 +48,7 @@ export default function TallerGrid() {
             <span
               className="relative z-10 pointer-events-none select-none text-center text-base font-semibold
                          tracking-wide text-white opacity-0 transition-all duration-300
-                         group-hover:opacity-100 group-hover:scale-110
+                         group-hover:opacity-100 scale-80 group-hover:scale-100
                          sm:text-lg md:text-xl"
             >
               {item.label}
