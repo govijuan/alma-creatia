@@ -59,7 +59,7 @@ const Innovacion = () => {
   ];
   return (
     <div className="relative w-screen">
-      <PageVideoHeader videoSrc="/backgrounds/rostro-arcilla.mp4" pageTitle="INNOVACIÓN" targetId="futuro" />
+      <PageVideoHeader videoSrc="/backgrounds/seashel-fobonacci-symbols.mp4" pageTitle="INNOVATIO" targetId="futuro" />
       <div className="mt-[100vh] h-[500vh] flex flex-col items-center">
         {InnovacionStickySections.map((section, index) => (
           <StickySection
