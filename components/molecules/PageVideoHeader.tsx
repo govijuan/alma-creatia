@@ -29,10 +29,10 @@ export default function PageVideoHeader({videoSrc, pageTitle, targetId}: PageVid
           <PageTitle title={pageTitle} />
           <div className="flex justify-center pb-4">
             <div className="flex flex-col">
-              <div className="text-2xl text-center">
+              {/*<div className="text-2xl text-center">
                 Estudio Creativo & Digital
               </div>
-              <div className="text-2xl text-center">ALMACREATIASTUDIO</div>
+              <div className="text-2xl text-center">ALMACREATIASTUDIO</div>*/}
             </div>
           </div>
           <div className="flex justify-center">

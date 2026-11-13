@@ -2,55 +2,51 @@
 
 import PageVideoHeader from "@/components/molecules/PageVideoHeader";
 import StickySection from "@/components/molecules/StickySection";
-import BrandingGrid from "@/components/organisms/BrandingGrid";
-import TallerGrid from "@/components/organisms/TallerGrid";
 import Footer from "@/components/organisms/Footer";
+import GlassCard from "@/components/molecules/GlassCard";
+import ServiciosInnovatio from "@/components/molecules/ServiciosInnovatio";
 
 const Innovacion = () => {
   const InnovacionStickySections = [
     {
-      id: "futuro",
-      title: "El futuro se diseña hoy, con visión y tecnología",
+      id: "creatividad",
+      title: "Donde la creatividad digital cobra vida y se transforma en realidad.",
+      content: (
+        <></>
+      ),
+      buttonText: "",
+      buttonLink:""
+    },
+    {
+      id: "transformamos",
+      title: "Transformamos Ideas Disruptivas en Experiencias Digitales Unicas",
       content: (
         <>
           <p className="mb-4 text-xl">
-            Innovación no es solo adoptar lo nuevo, es anticipar lo que viene
+            En el ecosistema digital actual, innovar ya no es una opción: es la clave para destacar. <b>Innovatio</b> es nuestro laboratorio de creación y desarrollo digital, un espacio donde la imaginación, la estrategia visual y la tecnología convergente se unen para dar forma a productos digitales totalmente nuevos.
+          </p>
+          <p className="text-xl">
+            No solo desarrollamos tecnología; <b>te acompañamos en la aventura de dar vida a tu idea</b>. Desde la concepción del concepto y el diseño de la experiencia hasta la producción y el lanzamiento, caminamos junto a tu empresa o proyecto en cada etapa del camino.
           </p>
         </>
       ),
-      buttonText: "EXPLORAR",
-      buttonLink: "#",
+      buttonText: "",
+      buttonLink: "",
     },
     {
-      id: "tecnologia",
-      title: "Tecnología al servicio de la creatividad humana",
+      id: "filosofia",
+      title: "Nuestra Filosofía: Co-creación y Acompañamiento",
       content: (
         <>
           <p className="mb-4 text-xl">
-            IA, Web3, Realidad Extendida: herramientas que amplifican
-            el talento, no lo reemplazan
+            Entender un nuevo proyecto digital puede sentirse como internarse en territorio desconocido. Por eso, en <b>Innovatio</b> nos convertimos en tu aliado estratégico:
           </p>
-          <p className="text-xl">
-            Integramos las tecnologías emergentes en tu estrategia de marca
-            para crear experiencias que antes eran imposibles
-          </p>
-        </>
-      ),
-      buttonText: "DESCUBRIR",
-      buttonLink: "#",
-    },
-    {
-      id: "impacto",
-      title: "Innovación con propósito genera impacto real",
-      content: (
-        <>
-          <p className="mb-4 text-xl">
-            Cada experimento, cada prototipo, cada iteración
-            tiene un objetivo: resolver problemas que importan
-          </p>
-          <p className="text-xl">
-            Medimos el éxito no por lo novedoso, sino por lo transformador
-          </p>
+          <ol className="text-xl">
+            <li><b>Aterrizamos la Idea</b>: Escuchamos tu visión y la estructuramos en un concepto digital viabilizado y atractivo.</li>
+            <li><b>Diseño & Experiencia</b>: Creamos interfaces (UI/UX) intuitivas, estéticas y alineadas con la identidad de tu marca.</li>
+            <li><b>Desarrollo & Producción</b>: Construimos soluciones sólidas, escalables y adaptadas a las mejores prácticas tecnológicas.</li>
+            <li><b>Lanzamiento & Acompañamiento</b>: No te dejamos solo. Te guiamos en el despliegue y optimización de tu producto digital.</li>
+          </ol>
         </>
       ),
       buttonText: "",
@@ -73,8 +69,9 @@ const Innovacion = () => {
           />
         ))}
       </div>
-      <BrandingGrid />
-      <TallerGrid />
+      <section id="futuro" className="w-full h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-blue-900 to-blue-700 text-white">
+        <ServiciosInnovatio />
+      </section>
       <Footer />
     </div>
   );

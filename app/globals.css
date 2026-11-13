@@ -10,6 +10,10 @@
     font-family: var(--font-hello-paris), serif;
 }
 
+.font-fibonacci {
+    font-family: var(--font-fibonacci-icons), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

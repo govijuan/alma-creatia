@@ -13,3 +13,10 @@ export const helloParisSerif = localFont({
   variable: "--font-hello-paris",
   display: "swap",
 });
+
+// Configuration for Fibonacci Icons (symbol font)
+export const fibonacciIcons = localFont({
+  src: "./fonts/Fibonacci-icons-font.ttf",
+  variable: "--font-fibonacci-icons",
+  display: "swap",
+});

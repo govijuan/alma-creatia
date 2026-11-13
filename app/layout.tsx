@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Montserrat } from "next/font/google";
-import { theSeasons, helloParisSerif } from "./fonts";
+import { theSeasons, helloParisSerif, fibonacciIcons } from "./fonts";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} ${theSeasons.variable} ${helloParisSerif.variable} antialiased`}
+        className={`${montserrat.variable} ${theSeasons.variable} ${helloParisSerif.variable} ${fibonacciIcons.variable} antialiased`}
       >
         {children}
       </body>
