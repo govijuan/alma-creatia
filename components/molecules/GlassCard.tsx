@@ -1,13 +1,42 @@
+import type { ReactNode } from "react";
+
 interface GlassCardProps {
   title: string;
-  content: string;
-  buttonColor: string;
+  content: ReactNode;
+  buttonColor: 'yellow' | 'green' | 'red' | 'blue' | 'violet' | 'pink';
   linkTxt: string;
   linkUrl: string;
   iconLetter: string;
   link2Txt?: string;
   link2Url?: string;
 }
+
+const gradientMap = {
+  yellow: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #f5d97b 0%, #d4a574 60%, #8b5a3c 100%)',
+    cta: 'linear-gradient(180deg, #fef3c7 0%, #f5d97b 50%, #d4a574 100%)',
+  },
+  green: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #34d399 0%, #6ee7b7 50%, #10b981 100%)',
+    cta: 'linear-gradient(180deg, #d1fae5 0%, #86efac 50%, #34d399 100%)',
+  },
+  red: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #f87171 0%, #fb923c 50%, #ef4444 100%)',
+    cta: 'linear-gradient(180deg, #fee2e2 0%, #fca5a5 50%, #f87171 100%)',
+  },
+  blue: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #60a5fa 0%, #93c5fd 50%, #3b82f6 100%)',
+    cta: 'linear-gradient(180deg, #dbeafe 0%, #93c5fd 50%, #60a5fa 100%)',
+  },
+  violet: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #a78bfa 0%, #c4b5fd 50%, #7c3aed 100%)',
+    cta: 'linear-gradient(180deg, #e9d5ff 0%, #d8b4fe 50%, #a78bfa 100%)',
+  },
+  pink: {
+    icon: 'radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.35) 0%, transparent 50%), linear-gradient(135deg, #f472b6 0%, #f9a8d4 50%, #ec4899 100%)',
+    cta: 'linear-gradient(180deg, #fce7f3 0%, #fbcfe8 50%, #f472b6 100%)',
+  },
+};
 
 const GlassCard = ({ title, content, buttonColor, linkTxt, linkUrl, iconLetter, link2Txt, link2Url }: GlassCardProps) => {
   return (
@@ -22,7 +51,7 @@ const GlassCard = ({ title, content, buttonColor, linkTxt, linkUrl, iconLetter, 
           <div className="flex items-center gap-2">
             <div aria-hidden="true" className="relative size-18 mb-3.5">
               <span className="absolute -inset-1.5 rounded-full blur-sm animate-twc17-pulse motion-reduce:animate-none [background:radial-gradient(circle,oklch(0.87_0.11_90/0.4)_0%,transparent_65%)]"></span>
-              <div className="relative flex items-center justify-center size-18 rounded-full [background:radial-gradient(circle_at_30%_25%,oklch(1_0_0/0.35)_0%,transparent_50%),linear-gradient(135deg,#f5d97b_0%,#d4a574_60%,#8b5a3c_100%)] shadow-[inset_0_2px_0_oklch(1_0_0/0.5),inset_0_-2px_0_oklch(0.35_0.06_50/0.4),0_8px_20px_-4px_oklch(0.78_0.08_70/0.5),0_0_0_1px_oklch(1_0_0/0.12)]">
+              <div className="relative flex items-center justify-center size-18 rounded-full shadow-[inset_0_2px_0_oklch(1_0_0/0.5),inset_0_-2px_0_oklch(0.35_0.06_50/0.4),0_8px_20px_-4px_oklch(0.78_0.08_70/0.5),0_0_0_1px_oklch(1_0_0/0.12)]" style={{ background: gradientMap[buttonColor].icon }}>
                 <span className="font-fibonacci text-7xl">{ iconLetter }</span>
               </div>
             </div>
@@ -60,7 +89,7 @@ const GlassCard = ({ title, content, buttonColor, linkTxt, linkUrl, iconLetter, 
           </dl>*/}
 
           <div className="grid grid-cols-[1fr_auto] gap-1.5 mb-4">
-          <a href={ linkUrl } className="group/cta inline-flex items-center justify-center gap-1.5 min-h-11 px-4 rounded-2xl no-underline text-[13px] font-bold tracking-[-0.01em] text-twc17-ctaink [background:linear-gradient(180deg,#fef3c7_0%,#f5d97b_50%,#d4a574_100%)] shadow-[inset_0_1px_0_oklch(1_0_0/0.6),inset_0_-1px_0_oklch(0.35_0.06_50/0.4),0_4px_12px_oklch(0.87_0.11_90/0.4),0_0_0_1px_oklch(0.87_0.11_90/0.3)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.7),inset_0_-1px_0_oklch(0.35_0.06_50/0.4),0_6px_18px_oklch(0.87_0.11_90/0.6),0_0_0_1px_oklch(0.87_0.11_90/0.5)] focus-visible:outline-2 focus-visible:outline-twc17-gilt focus-visible:outline-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+          <a href={ linkUrl } className="group/cta inline-flex items-center justify-center gap-1.5 min-h-11 px-4 rounded-2xl no-underline text-[13px] font-bold tracking-[-0.01em] text-twc17-ctaink shadow-[inset_0_1px_0_oklch(1_0_0/0.6),inset_0_-1px_0_oklch(0.35_0.06_50/0.4),0_4px_12px_oklch(0.87_0.11_90/0.4),0_0_0_1px_oklch(0.87_0.11_90/0.3)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.7),inset_0_-1px_0_oklch(0.35_0.06_50/0.4),0_6px_18px_oklch(0.87_0.11_90/0.6),0_0_0_1px_oklch(0.87_0.11_90/0.5)] focus-visible:outline-2 focus-visible:outline-twc17-gilt focus-visible:outline-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0" style={{ background: gradientMap[buttonColor].cta }}>
             <span>{ linkTxt }</span>
               <span aria-hidden="true" className="inline-flex items-center transition-transform duration-200 group-hover/cta:translate-x-[3px] motion-reduce:transition-none motion-reduce:group-hover/cta:translate-x-0">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
