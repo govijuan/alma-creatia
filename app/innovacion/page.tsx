@@ -69,9 +69,7 @@ const Innovacion = () => {
           />
         ))}
       </div>
-      <section id="futuro" className="w-full h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-blue-900 to-blue-700 text-white">
-        <ServiciosInnovatio />
-      </section>
+      <ServiciosInnovatio />
       <Footer />
     </div>
   );

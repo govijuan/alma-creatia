@@ -91,12 +91,21 @@ const ServiciosInnovatio = () => {
       link2Url: "#",
       iconLetter: "i",
     },
-  ] as const;
+  ] as Array<{
+    title: string;
+    content: React.ReactNode;
+    buttonColor: 'yellow' | 'green' | 'red' | 'blue' | 'violet' | 'pink';
+    linkTxt: string;
+    linkUrl: string;
+    iconLetter: string;
+    link2Txt?: string;
+    link2Url?: string;
+  }>;
   return(
-  <section id="serviocios-innovatio">
+  <section id="serviocios-innovatio" className=" relative w-3/4 mx-auto mt-15 text-center text-white">
       <h2 className="text-3xl font-bold mb-4">Ecosistema de Soluciones Innovatio</h2>
       <p>Diseñamos y producimos productos digitales interactivos, educativos y de alto impacto para conectar con tu audiencia:</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 [&>article]:max-w-none mt-8">
         {soluciones.map((solucion, index) => (
           <GlassCard
             key={index}
@@ -106,6 +115,8 @@ const ServiciosInnovatio = () => {
             linkTxt={solucion.linkTxt}
             linkUrl={solucion.linkUrl}
             iconLetter={solucion.iconLetter}
+            {...(solucion.link2Txt && { link2Txt: solucion.link2Txt })}
+            {...(solucion.link2Url && { link2Url: solucion.link2Url })}
           />
         ))}
       </div>
